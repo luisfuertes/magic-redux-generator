@@ -1,3 +1,4 @@
-import * as reduxGenerator from './reduxGenerator';
+import {createTypes, createActions, createReducer} from './reduxGenerator';
+import webservices from './webservices';
 
-module.exports = reduxGenerator;
+module.exports = {createTypes, createActions, createReducer, webservices};
