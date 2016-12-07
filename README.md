@@ -7,7 +7,7 @@ Component in development. I accept suggestions.
 Import
 `import reduxGenerator from 'redux-generator'` 
 
-*Actions.js basic example:*
+**Actions.js basic example:**
 ``` 
 import _ from 'lodash'
 import reduxGenerator from 'redux-generator'
@@ -16,7 +16,7 @@ let baseUri = mainUrl + '/users'
 export default reduxGenerator.createActions(baseUri, 'users')
 ``` 
 
-*With custom actions:*
+**With custom actions:**
 ``` 
 import _ from 'lodash'
 import reduxGenerator from 'redux-generator'
