@@ -1,6 +1,6 @@
 {
   "name": "redux-generator",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Component for generate redux actions/reducer",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,9 @@
     "generator"
   ],
   "author": "Luis Fuertes <luis.fuertes@clouddistrict.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "querystring": "^0.2.0"
+  }
 }
