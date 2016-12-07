@@ -43,7 +43,7 @@ export let createActions = (url, typeName) => {
           if(onSucess)
             onSucess(value)
         }).catch((error) => {
-          console.log('m-r-g delete ' + typeName + ' error: ': error)
+          console.log('m-r-g fetch ' + typeName + ' error: ': error)
           if(onError)
             onError(error)
         });
@@ -59,7 +59,7 @@ export let createActions = (url, typeName) => {
           if(onSucess)
             onSucess(value)
         }).catch((error) => {
-          console.log('m-r-g delete ' + typeName + ' error: ': error)
+          console.log('m-r-g create ' + typeName + ' error: ': error)
           if(onError)
             onError(error)
         })
@@ -74,7 +74,7 @@ export let createActions = (url, typeName) => {
           if(onSucess)
             onSucess(value)
         }).catch((error) => {
-          console.log('m-r-g delete ' + typeName + ' error: ': error)
+          console.log('m-r-g update ' + typeName + ' error: ': error)
           if(onError)
             onError(error)
         })
