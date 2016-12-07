@@ -34,7 +34,7 @@ export let createActions = (url, typeName) => {
       return dispatch({type: types.ACTIONS_SET_FETCHING, value})
     },
 
-    fetch: (queryParams, responseType, onSucess) => {
+    fetch: (queryParams, responseType, onSucess, onError) => {
       var fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
       return (dispatch, getState) => {
         fetch(fetchUrl, responseType).then((value) => {
@@ -42,11 +42,15 @@ export let createActions = (url, typeName) => {
           dispatch({type: types.ACTIONS_UPDATE_TOTAL_ITEMS, value:value['total']})
           if(onSucess)
             onSucess(value)
+        }).catch((error) => {
+          console.log('m-r-g delete ' + typeName + ' error: ': error)
+          if(onError)
+            onError(error)
         });
       }
     },
 
-    create: (data, queryParams, responseType, onSucess) => {
+    create: (data, queryParams, responseType, onSucess, onError) => {
       var fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
       return (dispatch, getState) => {
         create(data, fetchUrl, responseType).then((value) => {
@@ -54,29 +58,41 @@ export let createActions = (url, typeName) => {
           //dispatch({type: types.ACTIONS_CREATE, value})
           if(onSucess)
             onSucess(value)
-        });
+        }).catch((error) => {
+          console.log('m-r-g delete ' + typeName + ' error: ': error)
+          if(onError)
+            onError(error)
+        })
       }
     },
 
-    update: (data, queryParams, responseType, onSucess) => {
+    update: (data, queryParams, responseType, onSucess, onError) => {
       var fetchUrl = queryParams ? url + '/' + data.id + '?' + querystring.stringify(queryParams) : url + '/' + data.id
       return (dispatch, getState) => {
         update(fetchUrl, responseType).then((value) => {
           dispatch({type: types.ACTIONS_UPDATE, value})
           if(onSucess)
             onSucess(value)
-        });
+        }).catch((error) => {
+          console.log('m-r-g delete ' + typeName + ' error: ': error)
+          if(onError)
+            onError(error)
+        })
       }
     },
 
-    delete: (data, queryParams, responseType, onSucess) => {
+    delete: (data, queryParams, responseType, onSucess, onError) => {
       var fetchUrl = queryParams ? url + '/' + data.id + '?' + querystring.stringify(queryParams) : url + '/' + data.id
       return (dispatch, getState) => {
         remove(fetchUrl).then((value) => {
           dispatch({type: types.ACTIONS_DELETE, value})
           if(onSucess)
             onSucess(value)
-        });
+        }).catch((error) => {
+          console.log('m-r-g delete ' + typeName + ' error: ': error)
+          if(onError)
+            onError(error)
+        })
       }
     },
   }
