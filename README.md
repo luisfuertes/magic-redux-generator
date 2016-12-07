@@ -23,7 +23,7 @@ let baseUri = mainUrl + '/users'
 export default reduxGenerator.createActions(baseUri, 'users')
 ``` 
 
-**With custom actions:**
+**Actions.js with custom actions:**
 ``` 
 import _ from 'lodash'
 import reduxGenerator from 'magic-redux-generator'
