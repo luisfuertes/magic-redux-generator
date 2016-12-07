@@ -1,6 +1,5 @@
 import {createTypes, createReducer, createActions} from './reduxGenerator';
-//import webservices from './webservices';
-var webservices       = require('./webservices');
+import * as webservices from './webservices';
 
 module.exports = {
   createTypes:createTypes,
