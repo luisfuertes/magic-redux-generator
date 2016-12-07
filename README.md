@@ -50,6 +50,7 @@ export default reducerUser
 ``` 
 
 **Usage example:**
+
 Dispatch:
 ``` 
 import actions from './Actions.js'
