@@ -3,8 +3,12 @@ Simple component for generate redux actions/reducer
 
 Component in development. I accept suggestions.
 
-## basic usage:
-Import
+## Installation
+For install:
+`npm install redux-generator`
+
+## Basic usage
+Import:
 `import reduxGenerator from 'redux-generator'` 
 
 **Actions.js basic example:**
@@ -37,10 +41,22 @@ let customActions = {
 export default _.extend(actions, customActions, {types: types});
 ``` 
 
-Reducer.js example:
+**Reducer.js example:**
 ``` 
 import reduxGenerator from 'redux-generator'
 
 let reducerUser = reduxGenerator.createReducer('users')
 export default reducerUser
+``` 
+
+**Usage example:**
+Dispatch:
+``` 
+import actions from './Actions.js'
+dispatch(actions.fetch({offset: 0, limit: sizePerPage}, 'users'))
+``` 
+
+And in mapStateToProps:
+```
+list: state.users ? state.users.list : [],
 ``` 
