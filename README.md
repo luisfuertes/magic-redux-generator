@@ -5,11 +5,14 @@ Component in development. I accept suggestions.
 
 ## Installation
 For install:
-`npm install redux-generator`
+`npm install redux-generator --save`
 
 ## Basic usage
 Import:
 `import reduxGenerator from 'redux-generator'` 
+
+Set Authorization token (only on init):
+`reduxGenerator.webservices.configureToken({yourToken})`
 
 **Actions.js basic example:**
 ``` 
@@ -54,6 +57,7 @@ export default reducerUser
 Dispatch:
 ``` 
 import actions from './Actions.js'
+
 dispatch(actions.fetch({offset: 0, limit: sizePerPage}, 'users'))
 ``` 
 
