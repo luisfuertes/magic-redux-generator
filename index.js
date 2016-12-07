@@ -1,3 +1,3 @@
 var reduxGenerator = require('./reduxGenerator');
 
-module.exports = reduxGenerator;
+module.exports = {reduxGenerator};
