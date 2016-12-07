@@ -32,7 +32,7 @@ let baseUri = mainUrl + '/users'
 let actions = reduxGenerator.createActions(baseUri, 'users')
 let types = reduxGenerator.createTypes('users')
 
-//For add more actions
+//Add custom actions
 let customActions = {
   fetchSomeList: () => {
     return (dispatch, getState) => {
