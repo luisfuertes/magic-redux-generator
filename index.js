@@ -5,5 +5,5 @@ module.exports = {
   createTypes:createTypes,
   createReducer:createReducer,
   createActions:createActions,
-  webservices:{webservices},
+  webservices:webservices,
 };
