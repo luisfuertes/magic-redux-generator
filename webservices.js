@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export function configureAxios(authToken){
+export function configureToken(authToken){
   axios.defaults.baseURL = '';
   axios.defaults.headers.common['Authorization'] = authToken;
   axios.defaults.headers.post['Content-type'] = 'application/json';
