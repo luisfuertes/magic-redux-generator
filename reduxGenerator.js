@@ -51,7 +51,7 @@ export let createActions = (url, typeName) => {
             if(onSucess) onSucess(value)
 
         }).catch((error) => {
-          console.error("FetchItem error ", fetchUrl, error);
+          //console.error("FetchItem error ", fetchUrl, error);
           dispatch({type: types.ACTIONS_ERROR, error:error})
         });
       }
@@ -71,7 +71,7 @@ export let createActions = (url, typeName) => {
           if(onSucess) onSucess(value)
 
         }).catch((error) => {
-          console.error("Fetch error ", fetchUrl, error);
+          //console.error("Fetch error ", fetchUrl, error);
           dispatch({type: types.ACTIONS_ERROR, error:error})
         });
       }
@@ -85,7 +85,7 @@ export let createActions = (url, typeName) => {
           if(onSucess) onSucess(value)
 
         }).catch((error) => {
-          console.error("Create error ", fetchUrl, error);
+          //console.error("Create error ", fetchUrl, error);
           dispatch({type: types.ACTIONS_ERROR, error:error})
         });
       }
@@ -106,7 +106,7 @@ export let createActions = (url, typeName) => {
           if(onSucess) onSucess(value)
 
         }).catch((error) => {
-          console.error("Update error ", fetchUrl, error);
+          //console.error("Update error ", fetchUrl, error);
           dispatch({type: types.ACTIONS_ERROR, error:error})
         });
       }
@@ -120,7 +120,7 @@ export let createActions = (url, typeName) => {
           if(onSucess) onSucess(value)
 
         }).catch((error) => {
-          console.error("Remove error ", fetchUrl, error);
+          //console.error("Remove error ", fetchUrl, error);
           dispatch({type: types.ACTIONS_ERROR, error:error})
         });
       }
@@ -134,7 +134,7 @@ export let createActions = (url, typeName) => {
           if(onSucess) onSucess(value)
 
         }).catch((error) => {
-          console.error("MultipleDelete error ", fetchUrl, error);
+          //console.error("MultipleDelete error ", fetchUrl, error);
           dispatch({type: types.ACTIONS_ERROR, error:error})
         });
       }
@@ -143,7 +143,7 @@ export let createActions = (url, typeName) => {
 
       return (dispatch, getState) => {
         Promise.all(promises).then(function(results){
-          console.log("MultipleDelete results: ", results)
+          //console.log("MultipleDelete results: ", results)
           if(onSucess) onSucess()
         });
       }
