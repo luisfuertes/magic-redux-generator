@@ -40,8 +40,7 @@ export default {
 ```
 import reduxGenerator from 'magic-redux-generator'
 
-let reducerUser = reduxGenerator.createReducer('users')
-export default reducerUser
+export default reduxGenerator.createReducer('users')
 ```
 
 **Usage example:**
@@ -55,21 +54,21 @@ dispatch(actions.fetch({offset: 0, limit: sizePerPage}, 'users'))
 
 And in mapStateToProps:
 ```
-list: state.users ? state.users.list : [],
+list: state.users.list,
 ```
 
 
 **Error reducer example:**
 ```
 import reduxGenerator from 'magic-redux-generator'
-const users = reduxGenerator.createTypes('users')
+const users = reduxGenerator.createTypes('users')//One per action/reducer generate with reduxGenerator
 
 const initialState = {
   type: null,
   error: null,
 };
 
-export default function loginState(state = initialState, action = {}) {
+export default function errorReducer(state = initialState, action = {}) {
   switch (action.type) {
 
     case users.ACTIONS_ERROR:
