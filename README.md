@@ -66,3 +66,37 @@ And in mapStateToProps:
 ```
 list: state.users ? state.users.list : [],
 ```
+
+
+**Error reducer example:**
+```
+import reduxGenerator from 'magic-redux-generator'
+const users = reduxGenerator.createTypes('users')
+
+const initialState = {
+  type: null,
+  error: null,
+};
+
+export default function loginState(state = initialState, action = {}) {
+  switch (action.type) {
+
+    case users.ACTIONS_ERROR:
+      return {
+        ...state,
+        type: users.ACTIONS_ERROR,
+        error: action.error,
+      };
+
+    case 'REMOVE_ERROR':
+      return {
+        ...state,
+        error: null,
+        type: null,
+      };
+
+    default:
+      return state;
+  }
+}
+```
