@@ -12,18 +12,9 @@ Import:
 `import reduxGenerator from 'magic-redux-generator'`
 
 Set Authorization token (only on init):
-`reduxGenerator.webservices.configureToken({yourToken})`
+`reduxGenerator.webservices.configureToken(yourToken)`
 
 **Actions.js basic example:**
-```
-import _ from 'lodash'
-import reduxGenerator from 'magic-redux-generator'
-
-let baseUri = mainUrl + '/users'
-export default reduxGenerator.createActions(baseUri, 'users')
-```
-
-**Actions.js with custom actions:**
 ```
 import reduxGenerator from 'magic-redux-generator'
 
