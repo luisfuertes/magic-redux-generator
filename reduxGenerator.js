@@ -158,7 +158,7 @@ export let createActions = (url, typeName) => {
       }
     },
 
-    deleteRows: (itemsArray, queryParams, responseType, postDispatchItem, postDispatchAll) =>  {
+    deleteRows: (itemsArray, queryParams, postDispatchItem, postDispatchAll) =>  {
       let deleteRow = (itemId) => {
         let fetchUrl = queryParams ? url + '/' + itemId + '?' + querystring.stringify(queryParams) : url + '/' + itemId
         remove(fetchUrl).then((value) => {

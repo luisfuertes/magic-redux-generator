@@ -94,9 +94,9 @@ export default function errorReducer(state = initialState, action = {}) {
 }
 ```
 
-### Props
+## Props
 
-## fetchItem
+### fetchItem
 
 | Prop name    | Type     | Description                            | Example    |
 |--------------|----------|----------------------------------------|------------|
@@ -105,3 +105,54 @@ export default function errorReducer(state = initialState, action = {}) {
 | responseType | String   | WS response sufix                      | "users"    |
 | preDispatch  | Function | Function to execute before do dispatch | () => {}   |
 | postDispatch | Function | Function to execute after do dispatch  | () => {}   |
+
+
+### fetch
+
+| Prop name     | Type     | Description                            | Example    |
+|---------------|----------|----------------------------------------|------------|
+| urlExtension  | String   | Url sufix                              | "/5"       |
+| queryParams   | Object   | Query url params                       | {limit:15} |
+| responseType  | String   | WS response sufix                      | "users"    |
+| responseTotal | String   | WS response total sufix                | "total"    |
+| preDispatch   | Function | Function to execute before do dispatch | () => {}   |
+| postDispatch  | Function | Function to execute after do dispatch  | () => {}   |
+
+
+### create
+
+| Prop name    | Type     | Description                           | Example                           |
+|--------------|----------|---------------------------------------|-----------------------------------|
+| data         | Object   | Object with create data               | {username:example, password:1234} |
+| urlExtension | String   | Url sufix                             | "/users"                          |
+| queryParams  | Object   | Query url params                      | {limit:15}                        |
+| postDispatch | Function | Function to execute after do dispatch | () => {}                          |
+
+
+### update
+
+| Prop name    | Type     | Description                           | Example                                 |
+|--------------|----------|---------------------------------------|-----------------------------------------|
+| data         | Object   | Object with update data               | {id:3, username:example, password:1234} |
+| urlExtension | String   | Url sufix                             | "/3"                                    |
+| queryParams  | Object   | Query url params                      | {limit:15}                              |
+| postDispatch | Function | Function to execute after do dispatch | () => {}                                |
+
+
+### delete
+
+| Prop name    | Type     | Description                           | Example    |
+|--------------|----------|---------------------------------------|------------|
+| urlExtension | String   | Url sufix                             | "/3"       |
+| queryParams  | Object   | Query url params                      | {limit:15} |
+| postDispatch | Function | Function to execute after do dispatch | () => {}   |
+
+
+### deleteRows
+
+| Prop name        | Type     | Description                                | Example    |
+|------------------|----------|--------------------------------------------|------------|
+| urlExtension     | String   | Url sufix                                  | "/3"       |
+| queryParams      | Object   | Query url params                           | {limit:15} |
+| postDispatchItem | Function | Function to execute after delete each item | () => {}   |
+| postDispatchAll  | Function | Function to execute after delete all items | () => {}   |
