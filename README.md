@@ -30,7 +30,9 @@ export default {
 
   yourCustomAction: () => {
     return (dispatch, getState) => {
-
+      ...
+      let item = extraData
+      dispatch(actions.setItem(item))
     }
   },
 }
@@ -40,7 +42,8 @@ export default {
 ```
 import reduxGenerator from 'magic-redux-generator'
 
-export default reduxGenerator.createReducer('users')
+let userReducer = createReducer('partidos')
+export default userReducer.reducer
 ```
 
 **Usage example:**
@@ -49,7 +52,7 @@ Dispatch action:
 ```
 import actions from './Actions.js'
 
-dispatch(actions.fetch({offset: 0, limit: sizePerPage}, 'users'))
+dispatch(actions.fetch({offset: 0, limit: 10}, 'users'))
 ```
 
 And in mapStateToProps:

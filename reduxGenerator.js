@@ -37,64 +37,93 @@ export let createActions = (url, typeName) => {
       return {type: types.ACTIONS_SET_FETCHING, value}
     },
 
-    fetchItem: (urlParam, queryParams, responseType, onSucess) => {
-      var fetchUrl = urlParam ? url + urlParam : url
+    fetchItem: (urlExtension, queryParams, responseType, preDispatch, postDispatch) => {
+
+      var fetchUrl = urlExtension ? url + urlExtension : url
       fetchUrl = queryParams ? fetchUrl + '?' + querystring.stringify(queryParams) : fetchUrl
+
       return (dispatch, getState) => {
         fetch(fetchUrl).then((value) => {
 
-            if(responseType)
-              dispatch({type: types.ACTIONS_UPDATE_ITEM, value:value[responseType]})
-            else
-              dispatch({type: types.ACTIONS_UPDATE_ITEM, value})
+            var formatResponse = responseType && value[responseType] : value[responseType] : value
 
-            if(onSucess) onSucess(value)
+            if(preDispatch){
+              preDispatch(value).then(value => {
 
+                dispatch({type: types.ACTIONS_UPDATE_ITEM, value:formatResponse})
+
+                postDispatch && postDispatch(formatResponse)
+              })
+            }else{
+              dispatch({type: types.ACTIONS_UPDATE_ITEM, value:formatResponse})
+
+              postDispatch && postDispatch(formatResponse)
+            }
         }).catch((error) => {
-          //console.error("FetchItem error ", fetchUrl, error);
-          dispatch({type: types.ACTIONS_ERROR, error:error})
+          console.error("fetchItem error: ", error);
+          dispatch({type: types.ACTIONS_ERROR, error})
         });
       }
     },
 
-    fetch: (queryParams, responseType, responseTotal, onSucess) => {
-      var fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+    fetch: (urlExtension, queryParams, responseType, responseTotal, preDispatch, postDispatch) => {
+
+      var fetchUrl = urlExtension ? url + urlExtension : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+
       return (dispatch, getState) => {
         fetch(fetchUrl).then((value) => {
-          if(responseType)
-            dispatch({type: types.ACTIONS_FETCH, value:value[responseType] ? value[responseType] : []})
-          else
-            dispatch({type: types.ACTIONS_FETCH, value:value})
 
-          if(responseTotal) dispatch({type: types.ACTIONS_UPDATE_TOTAL_ITEMS, value:value[responseTotal]})
+          var formatResponse = responseType && value[responseType] : value[responseType] : value
 
-          if(onSucess) onSucess(value)
+          if(preDispatch){
+            preDispatch(formatResponse).then(value => {
+
+              dispatch({type: types.ACTIONS_UPDATE_ITEM, value:formatResponse})
+
+              postDispatch && postDispatch(value)
+            })
+          }else{
+            dispatch({type: types.ACTIONS_FETCH, value:formatResponse})
+
+            if(responseTotal) dispatch({type: types.ACTIONS_UPDATE_TOTAL_ITEMS, value:value[responseTotal]})
+
+            postDispatch && postDispatch(value)
+          }
 
         }).catch((error) => {
-          //console.error("Fetch error ", fetchUrl, error);
-          dispatch({type: types.ACTIONS_ERROR, error:error})
+          console.error("fetch error: ", error);
+          dispatch({type: types.ACTIONS_ERROR, error})
         });
       }
     },
 
-    create: (data, queryParams, responseType, onSucess) => {
-      var fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+    create: (data, urlExtension, queryParams, postDispatch) => {
+
+      var fetchUrl = urlExtension ? url + urlExtension : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+
       return (dispatch, getState) => {
         create(data, fetchUrl).then((value) => {
-          //dispatch({type: types.ACTIONS_CREATE, value})
-          if(onSucess) onSucess(value)
+
+          postDispatch && postDispatch(value)
 
         }).catch((error) => {
-          //console.error("Create error ", fetchUrl, error);
-          dispatch({type: types.ACTIONS_ERROR, error:error})
+          console.error("create error: ", error);
+          dispatch({type: types.ACTIONS_ERROR, error})
         });
       }
     },
 
-    update: (data, queryParams, responseType, onSucess) => {
-      var fetchUrl = queryParams ? url + '/' + data.id + '?' + querystring.stringify(queryParams) : url + '/' + data.id
+    update: (data, urlExtension, queryParams, postDispatch) => {
+
+      var fetchUrl = urlExtension ? url + urlExtension : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+
       return (dispatch, getState) => {
         update(data, fetchUrl).then((value) => {
+
+          //If item is on reducer list, it will be replaced
           const state = getState()
           let list = _.clone(state[typeName].list)
           let index = _.indexOf(list, _.find(list, {id: value.id}));
@@ -103,48 +132,52 @@ export let createActions = (url, typeName) => {
             dispatch({type: types.ACTIONS_UPDATE, value:list})
           }
 
-          if(onSucess) onSucess(value)
+          postDispatch && postDispatch(value)
 
         }).catch((error) => {
-          //console.error("Update error ", fetchUrl, error);
-          dispatch({type: types.ACTIONS_ERROR, error:error})
+          console.error("update error: ", error);
+          dispatch({type: types.ACTIONS_ERROR, error})
         });
       }
     },
 
-    delete: (data, queryParams, responseType, onSucess) => {
-      var fetchUrl = queryParams ? url + '/' + data.id + '?' + querystring.stringify(queryParams) : url + '/' + data.id
+    delete: (urlExtension, queryParams, postDispatch) => {
+
+      var fetchUrl = urlExtension ? url + urlExtension : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+
       return (dispatch, getState) => {
         remove(fetchUrl).then((value) => {
-          //dispatch({type: types.ACTIONS_DELETE, value})
-          if(onSucess) onSucess(value)
+
+          postDispatch && postDispatch(value)
 
         }).catch((error) => {
-          //console.error("Remove error ", fetchUrl, error);
-          dispatch({type: types.ACTIONS_ERROR, error:error})
+          console.error("delete error ", error);
+          dispatch({type: types.ACTIONS_ERROR, error})
         });
       }
     },
 
-    deleteRows: (items, queryParams, responseType, onSucess) =>  {
+    deleteRows: (itemsArray, queryParams, responseType, postDispatchItem, postDispatchAll) =>  {
       let deleteRow = (itemId) => {
         let fetchUrl = queryParams ? url + '/' + itemId + '?' + querystring.stringify(queryParams) : url + '/' + itemId
         remove(fetchUrl).then((value) => {
-          //dispatch({type: types.ACTIONS_DELETE, value})
-          if(onSucess) onSucess(value)
+
+          postDispatchItem && postDispatchItem(value)
 
         }).catch((error) => {
-          //console.error("MultipleDelete error ", fetchUrl, error);
+          console.error("MultipleDelete error ", fetchUrl, error);
           dispatch({type: types.ACTIONS_ERROR, error:error})
         });
       }
 
-      let promises = (items && items.length) ? _.map(items, itemId => deleteRow(itemId)) : []
+      let promises = (itemsArray && itemsArray.length) ? _.map(itemsArray, itemId => deleteRow(itemId)) : []
 
       return (dispatch, getState) => {
         Promise.all(promises).then(function(results){
-          //console.log("MultipleDelete results: ", results)
-          if(onSucess) onSucess()
+
+          postDispatchAll &&  postDispatchAll()
+
         });
       }
     },
