@@ -1,6 +1,6 @@
 {
   "name": "magic-redux-generator",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Component for generate redux actions/reducer",
   "main": "index.js",
   "scripts": {
