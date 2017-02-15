@@ -93,3 +93,15 @@ export default function errorReducer(state = initialState, action = {}) {
   }
 }
 ```
+
+### Props
+
+## fetchItem
+
+| Prop name    | Type     | Description                            | Example    |
+|--------------|----------|----------------------------------------|------------|
+| urlExtension | String   | Url sufix                              | "/id"       |
+| queryParams  | Object   | Query url params                       | {limit:15} |
+| responseType | String   | WS response sufix                      | "users"    |
+| preDispatch  | Function | Function to execute before do dispatch | () => {}   |
+| postDispatch | Function | Function to execute after do dispatch  | () => {}   |
