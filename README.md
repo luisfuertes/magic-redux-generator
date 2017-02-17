@@ -11,7 +11,7 @@ For install:
 Import:
 `import reduxGenerator from 'magic-redux-generator'`
 
-Set Authorization token (only on init):
+**Important: Set Authorization token (only on init):**
 `reduxGenerator.webservices.configureToken(yourToken)`
 
 **Actions.js basic example:**
@@ -42,7 +42,7 @@ export default {
 ```
 import reduxGenerator from 'magic-redux-generator'
 
-let userReducer = createReducer('partidos')
+let userReducer = createReducer('users')
 export default userReducer.reducer
 ```
 
@@ -94,7 +94,8 @@ export default function errorReducer(state = initialState, action = {}) {
 }
 ```
 
-## Props
+
+## Instance methods
 
 ### fetchItem
 
@@ -105,6 +106,7 @@ export default function errorReducer(state = initialState, action = {}) {
 | responseType | String   | WS response sufix                      | "users"    |
 | preDispatch  | Function | Function to execute before do dispatch | () => {}   |
 | postDispatch | Function | Function to execute after do dispatch  | () => {}   |
+
 
 
 ### fetch
@@ -119,6 +121,7 @@ export default function errorReducer(state = initialState, action = {}) {
 | postDispatch  | Function | Function to execute after do dispatch  | () => {}   |
 
 
+
 ### create
 
 | Prop name    | Type     | Description                           | Example                           |
@@ -127,6 +130,7 @@ export default function errorReducer(state = initialState, action = {}) {
 | urlExtension | String   | Url sufix                             | "/users"                          |
 | queryParams  | Object   | Query url params                      | {limit:15}                        |
 | postDispatch | Function | Function to execute after do dispatch | () => {}                          |
+
 
 
 ### update
@@ -139,6 +143,7 @@ export default function errorReducer(state = initialState, action = {}) {
 | postDispatch | Function | Function to execute after do dispatch | () => {}                                |
 
 
+
 ### delete
 
 | Prop name    | Type     | Description                           | Example    |
@@ -146,6 +151,7 @@ export default function errorReducer(state = initialState, action = {}) {
 | urlExtension | String   | Url sufix                             | "/3"       |
 | queryParams  | Object   | Query url params                      | {limit:15} |
 | postDispatch | Function | Function to execute after do dispatch | () => {}   |
+
 
 
 ### deleteRows
@@ -156,3 +162,14 @@ export default function errorReducer(state = initialState, action = {}) {
 | queryParams      | Object   | Query url params                           | {limit:15} |
 | postDispatchItem | Function | Function to execute after delete each item | () => {}   |
 | postDispatchAll  | Function | Function to execute after delete all items | () => {}   |
+
+
+
+## More instance methods
+
+| Instance method | Description                    | Example                             |
+|-----------------|--------------------------------|-------------------------------------|
+| setList         | Set the reducer list value     | dispatch(actions. setList([]))      |
+| setItem         | Set the reducer item value     | dispatch(actions.setItem({}))       |
+| setTotal        | Set the reducer total value    | dispatch(actions.setTotal(32))      |
+| setFetching     | Set the reducer fetching value | dispatch(actions.setFetching(true)) |
