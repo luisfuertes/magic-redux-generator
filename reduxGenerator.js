@@ -40,7 +40,7 @@ export let createActions = (url, typeName) => {
     fetchItem: (urlExtension, queryParams, responseType, preDispatch, postDispatch) => {
 
       var fetchUrl = urlExtension ? url + urlExtension : url
-      fetchUrl = queryParams ? fetchUrl + '?' + querystring.stringify(queryParams) : fetchUrl
+      fetchUrl = queryParams ? fetchUrl + '?' + querystring.stringify(queryParams, {skipNulls: true}) : fetchUrl
 
       return (dispatch, getState) => {
         fetch(fetchUrl).then((value) => {
@@ -69,7 +69,7 @@ export let createActions = (url, typeName) => {
     fetch: (urlExtension, queryParams, responseType, responseTotal, preDispatch, postDispatch) => {
 
       var fetchUrl = urlExtension ? url + urlExtension : url
-      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams, {skipNulls: true}) : url
 
       return (dispatch, getState) => {
         fetch(fetchUrl).then((value) => {
@@ -101,7 +101,7 @@ export let createActions = (url, typeName) => {
     create: (data, urlExtension, queryParams, postDispatch) => {
 
       var fetchUrl = urlExtension ? url + urlExtension : url
-      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams, {skipNulls: true}) : url
 
       return (dispatch, getState) => {
         create(data, fetchUrl).then((value) => {
@@ -118,7 +118,7 @@ export let createActions = (url, typeName) => {
     update: (data, urlExtension, queryParams, postDispatch) => {
 
       var fetchUrl = urlExtension ? url + urlExtension : url
-      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams, {skipNulls: true}) : url
 
       return (dispatch, getState) => {
         update(data, fetchUrl).then((value) => {
@@ -144,7 +144,7 @@ export let createActions = (url, typeName) => {
     delete: (urlExtension, queryParams, postDispatch) => {
 
       var fetchUrl = urlExtension ? url + urlExtension : url
-      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams) : url
+      fetchUrl = queryParams ? url + '?' + querystring.stringify(queryParams, {skipNulls: true}) : url
 
       return (dispatch, getState) => {
         remove(fetchUrl).then((value) => {
@@ -160,7 +160,7 @@ export let createActions = (url, typeName) => {
 
     deleteRows: (itemsArray, queryParams, postDispatchItem, postDispatchAll) =>  {
       let deleteRow = (itemId) => {
-        let fetchUrl = queryParams ? url + '/' + itemId + '?' + querystring.stringify(queryParams) : url + '/' + itemId
+        let fetchUrl = queryParams ? url + '/' + itemId + '?' + querystring.stringify(queryParams, {skipNulls: true}) : url + '/' + itemId
         remove(fetchUrl).then((value) => {
 
           postDispatchItem && postDispatchItem(value)
