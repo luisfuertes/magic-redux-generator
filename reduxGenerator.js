@@ -12,7 +12,6 @@ export function createTypes(typeName){
     ACTIONS_UPDATE_ITEM: 'ACTIONS_UPDATE_ITEM_'+typeName.toUpperCase(),
     ACTIONS_UPDATE_TOTAL_ITEMS: 'ACTIONS_UPDATE_TOTAL_ITEMS_'+typeName.toUpperCase(),
     ACTIONS_ERROR: 'ACTIONS_ERROR_'+typeName.toUpperCase(),
-
   }
 }
 
@@ -45,7 +44,7 @@ export let createActions = (url, typeName) => {
       return (dispatch, getState) => {
         fetch(fetchUrl).then((value) => {
 
-            var formatResponse = responseType && value[responseType] : value[responseType] : value
+            var formatResponse = responseType && value[responseType] ? value[responseType] : value
 
             if(preDispatch){
               preDispatch(value).then(value => {
@@ -74,7 +73,7 @@ export let createActions = (url, typeName) => {
       return (dispatch, getState) => {
         fetch(fetchUrl).then((value) => {
 
-          var formatResponse = responseType && value[responseType] : value[responseType] : value
+          var formatResponse = responseType && value[responseType] ? value[responseType] : value
 
           if(preDispatch){
             preDispatch(formatResponse).then(value => {
