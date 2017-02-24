@@ -3,12 +3,108 @@ Simple component for generate redux actions/reducer
 
 Component in development. I accept suggestions.
 
+
+
 ## Installation
 For install:
 `npm install magic-redux-generator --save`
 
+
+
+## Instance methods
+
+### fetchItem
+
+| Prop name    | Type     | Description                            | Example    |
+|--------------|----------|----------------------------------------|------------|
+| urlExtension | String   | Url sufix                              | "/id"       |
+| queryParams  | Object   | Query url params                       | {limit:15} |
+| responseType | String   | WS response sufix                      | "users"    |
+| preDispatch  | Function | Function to execute before do dispatch | () => {}   |
+| postDispatch | Function | Function to execute after do dispatch  | () => {}   |
+
+
+
+### fetch
+
+| Prop name     | Type     | Description                            | Example    |
+|---------------|----------|----------------------------------------|------------|
+| urlExtension  | String   | Url sufix                              | "/5"       |
+| queryParams   | Object   | Query url params                       | {limit:15} |
+| responseType  | String   | WS response sufix                      | "users"    |
+| responseTotal | String   | WS response total sufix                | "total"    |
+| preDispatch   | Function | Function to execute before do dispatch | () => {}   |
+| postDispatch  | Function | Function to execute after do dispatch  | () => {}   |
+
+
+
+### create
+
+| Prop name    | Type     | Description                           | Example                           |
+|--------------|----------|---------------------------------------|-----------------------------------|
+| data         | Object   | Object with create data               | {username:example, password:1234} |
+| urlExtension | String   | Url sufix                             | "/users"                          |
+| queryParams  | Object   | Query url params                      | {limit:15}                        |
+| postDispatch | Function | Function to execute after do dispatch | () => {}                          |
+
+
+
+### update
+
+| Prop name    | Type     | Description                           | Example                                 |
+|--------------|----------|---------------------------------------|-----------------------------------------|
+| data         | Object   | Object with update data               | {id:3, username:example, password:1234} |
+| urlExtension | String   | Url sufix                             | "/3"                                    |
+| queryParams  | Object   | Query url params                      | {limit:15}                              |
+| postDispatch | Function | Function to execute after do dispatch | () => {}                                |
+
+
+
+### delete
+
+| Prop name    | Type     | Description                           | Example    |
+|--------------|----------|---------------------------------------|------------|
+| urlExtension | String   | Url sufix                             | "/3"       |
+| queryParams  | Object   | Query url params                      | {limit:15} |
+| postDispatch | Function | Function to execute after do dispatch | () => {}   |
+
+
+
+### deleteRows
+
+| Prop name        | Type     | Description                                | Example    |
+|------------------|----------|--------------------------------------------|------------|
+| urlExtension     | String   | Url sufix                                  | "/3"       |
+| queryParams      | Object   | Query url params                           | {limit:15} |
+| postDispatchItem | Function | Function to execute after delete each item | () => {}   |
+| postDispatchAll  | Function | Function to execute after delete all items | () => {}   |
+
+
+
+## More instance methods
+
+| Instance method | Description                    | Example                             |
+|-----------------|--------------------------------|-------------------------------------|
+| setList         | Set the reducer list value     | dispatch(actions. setList([]))      |
+| setItem         | Set the reducer item value     | dispatch(actions.setItem({}))       |
+| setTotal        | Set the reducer total value    | dispatch(actions.setTotal(32))      |
+| setFetching     | Set the reducer fetching value | dispatch(actions.setFetching(true)) |
+
+
+
+## Project Example
+
+You can check this component with [this project example for react-native.](https://github.com/luisfuertes/testMagicReduxGenerator)
+```
+git clone https://github.com/luisfuertes/testMagicReduxGenerator
+cd projectDir && npm install
+react-native run-ios
+```
+
+
+
 ## Basic usage
-Import:
+**Import:**
 `import reduxGenerator from 'magic-redux-generator'`
 
 **Important: Set Authorization token (only on init):**
@@ -93,83 +189,3 @@ export default function errorReducer(state = initialState, action = {}) {
   }
 }
 ```
-
-
-## Instance methods
-
-### fetchItem
-
-| Prop name    | Type     | Description                            | Example    |
-|--------------|----------|----------------------------------------|------------|
-| urlExtension | String   | Url sufix                              | "/id"       |
-| queryParams  | Object   | Query url params                       | {limit:15} |
-| responseType | String   | WS response sufix                      | "users"    |
-| preDispatch  | Function | Function to execute before do dispatch | () => {}   |
-| postDispatch | Function | Function to execute after do dispatch  | () => {}   |
-
-
-
-### fetch
-
-| Prop name     | Type     | Description                            | Example    |
-|---------------|----------|----------------------------------------|------------|
-| urlExtension  | String   | Url sufix                              | "/5"       |
-| queryParams   | Object   | Query url params                       | {limit:15} |
-| responseType  | String   | WS response sufix                      | "users"    |
-| responseTotal | String   | WS response total sufix                | "total"    |
-| preDispatch   | Function | Function to execute before do dispatch | () => {}   |
-| postDispatch  | Function | Function to execute after do dispatch  | () => {}   |
-
-
-
-### create
-
-| Prop name    | Type     | Description                           | Example                           |
-|--------------|----------|---------------------------------------|-----------------------------------|
-| data         | Object   | Object with create data               | {username:example, password:1234} |
-| urlExtension | String   | Url sufix                             | "/users"                          |
-| queryParams  | Object   | Query url params                      | {limit:15}                        |
-| postDispatch | Function | Function to execute after do dispatch | () => {}                          |
-
-
-
-### update
-
-| Prop name    | Type     | Description                           | Example                                 |
-|--------------|----------|---------------------------------------|-----------------------------------------|
-| data         | Object   | Object with update data               | {id:3, username:example, password:1234} |
-| urlExtension | String   | Url sufix                             | "/3"                                    |
-| queryParams  | Object   | Query url params                      | {limit:15}                              |
-| postDispatch | Function | Function to execute after do dispatch | () => {}                                |
-
-
-
-### delete
-
-| Prop name    | Type     | Description                           | Example    |
-|--------------|----------|---------------------------------------|------------|
-| urlExtension | String   | Url sufix                             | "/3"       |
-| queryParams  | Object   | Query url params                      | {limit:15} |
-| postDispatch | Function | Function to execute after do dispatch | () => {}   |
-
-
-
-### deleteRows
-
-| Prop name        | Type     | Description                                | Example    |
-|------------------|----------|--------------------------------------------|------------|
-| urlExtension     | String   | Url sufix                                  | "/3"       |
-| queryParams      | Object   | Query url params                           | {limit:15} |
-| postDispatchItem | Function | Function to execute after delete each item | () => {}   |
-| postDispatchAll  | Function | Function to execute after delete all items | () => {}   |
-
-
-
-## More instance methods
-
-| Instance method | Description                    | Example                             |
-|-----------------|--------------------------------|-------------------------------------|
-| setList         | Set the reducer list value     | dispatch(actions. setList([]))      |
-| setItem         | Set the reducer item value     | dispatch(actions.setItem({}))       |
-| setTotal        | Set the reducer total value    | dispatch(actions.setTotal(32))      |
-| setFetching     | Set the reducer fetching value | dispatch(actions.setFetching(true)) |

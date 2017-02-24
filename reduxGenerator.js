@@ -47,11 +47,11 @@ export let createActions = (url, typeName) => {
             var formatResponse = responseType && value[responseType] ? value[responseType] : value
 
             if(preDispatch){
-              preDispatch(value).then(value => {
+              preDispatch(value).then(preDispatchResponse => {
 
-                dispatch({type: types.ACTIONS_UPDATE_ITEM, value:formatResponse})
+                dispatch({type: types.ACTIONS_UPDATE_ITEM, value:preDispatchResponse})
 
-                postDispatch && postDispatch(formatResponse)
+                postDispatch && postDispatch(preDispatchResponse)
               })
             }else{
               dispatch({type: types.ACTIONS_UPDATE_ITEM, value:formatResponse})
@@ -76,11 +76,11 @@ export let createActions = (url, typeName) => {
           var formatResponse = responseType && value[responseType] ? value[responseType] : value
 
           if(preDispatch){
-            preDispatch(formatResponse).then(value => {
+            preDispatch(formatResponse).then(preDispatchResponse => {
 
-              dispatch({type: types.ACTIONS_UPDATE_ITEM, value:formatResponse})
+              dispatch({type: types.ACTIONS_UPDATE_ITEM, value:preDispatchResponse})
 
-              postDispatch && postDispatch(value)
+              postDispatch && postDispatch(preDispatchResponse)
             })
           }else{
             dispatch({type: types.ACTIONS_FETCH, value:formatResponse})
